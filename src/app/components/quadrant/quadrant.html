@@ -1,0 +1,28 @@
+<section class="quadrant-card" [style.border-color]="config.color">
+  <header class="quadrant-header" [style.background-color]="config.headerColor">
+    <div class="quadrant-dot" [style.background-color]="config.color"></div>
+    <div class="quadrant-title-group">
+      <h2 class="quadrant-label">{{ config.label }}</h2>
+      <p class="quadrant-subtitle">{{ config.subtitle }}</p>
+    </div>
+    <span class="quadrant-count">{{ quadrantTasks().length }}</span>
+  </header>
+
+  <div
+    cdkDropList
+    [id]="config.id"
+    [cdkDropListData]="quadrantTasks()"
+    [cdkDropListConnectedTo]="connectedTo"
+    (cdkDropListDropped)="onDrop($event)"
+    class="quadrant-body"
+    [style.background-color]="config.bgColor"
+  >
+    @for (task of quadrantTasks(); track task.id) {
+      <app-task-card [task]="task" cdkDrag [cdkDragData]="task" />
+    }
+
+    @if (quadrantTasks().length === 0) {
+      <div class="empty-hint">Drop tasks here</div>
+    }
+  </div>
+</section>

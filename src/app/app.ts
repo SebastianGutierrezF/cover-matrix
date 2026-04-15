@@ -1,11 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { QUADRANT_CONFIGS, QuadrantConfig } from './models';
+import { Sidebar } from './components/sidebar/sidebar';
+import { Quadrant } from './components/quadrant/quadrant';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  standalone: true,
+  imports: [Sidebar, Quadrant],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('covey-matrix');
+  readonly quadrantConfigs: QuadrantConfig[] = QUADRANT_CONFIGS;
 }

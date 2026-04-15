@@ -1,0 +1,65 @@
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <div class="logo-grid">
+        <div class="logo-cell red"></div>
+        <div class="logo-cell blue"></div>
+        <div class="logo-cell amber"></div>
+        <div class="logo-cell gray"></div>
+      </div>
+      <div>
+        <h1 class="sidebar-title">Covey Matrix</h1>
+        <p class="sidebar-sub">4 Quadrants of Time Management</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-input-area">
+    <div class="input-row">
+      <input
+        [(ngModel)]="newTaskText"
+        (keydown)="onKeydown($event)"
+        placeholder="Add a task..."
+        class="task-input"
+        autocomplete="off"
+      />
+      <button (click)="addTask()" class="add-btn" [disabled]="!newTaskText.trim()">
+        Add
+      </button>
+    </div>
+  </div>
+
+  <div class="inbox-label">
+    <span>Inbox</span>
+    <span class="inbox-count">{{ inboxTasks().length }}</span>
+  </div>
+
+  <div
+    cdkDropList
+    id="inbox"
+    [cdkDropListData]="inboxTasks()"
+    [cdkDropListConnectedTo]="['do','plan','delegate','remove']"
+    (cdkDropListDropped)="onDrop($event)"
+    class="inbox-list"
+  >
+    @for (task of inboxTasks(); track task.id) {
+      <app-task-card [task]="task" cdkDrag [cdkDragData]="task" />
+    }
+
+    @if (inboxTasks().length === 0) {
+      <div class="inbox-empty">
+        <p>No tasks yet.</p>
+        <p>Add one above, then drag it into a quadrant.</p>
+      </div>
+    }
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="quadrant-legend">
+      <div class="legend-item"><span class="dot red"></span> Do — urgent + important</div>
+      <div class="legend-item"><span class="dot blue"></span> Plan — not urgent + important</div>
+      <div class="legend-item"><span class="dot amber"></span> Delegate — urgent + not important</div>
+      <div class="legend-item"><span class="dot gray"></span> Remove — not urgent + not important</div>
+    </div>
+  </div>
+</aside>
