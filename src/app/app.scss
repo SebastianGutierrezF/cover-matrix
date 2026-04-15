@@ -25,3 +25,32 @@ app-sidebar {
   height: 100%;
   min-height: 500px;
 }
+
+// Mobile: stack matrix on top, inbox below
+@media (max-width: 640px) {
+  .app-layout {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+  }
+
+  app-sidebar {
+    width: 100%;
+    height: auto;
+    order: 2;
+  }
+
+  .app-main {
+    overflow: visible;
+    order: 1;
+    padding: 12px;
+  }
+
+  .matrix-grid {
+    height: auto;
+    min-height: unset;
+    grid-template-rows: auto;
+    gap: 10px;
+  }
+}
