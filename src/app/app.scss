@@ -26,6 +26,23 @@ app-sidebar {
   min-height: 500px;
 }
 
+.app-footer {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: #9ca3af;
+
+  a {
+    color: #6b7280;
+    text-decoration: none;
+
+    &:hover {
+      color: #374151;
+      text-decoration: underline;
+    }
+  }
+}
+
 // Mobile: stack matrix on top, inbox below
 @media (max-width: 640px) {
   .app-layout {
